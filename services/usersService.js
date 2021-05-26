@@ -37,9 +37,6 @@ const isEmailExist = async (email) => {
 };
 
 const login = async (emailInput, passwordInput) => {
-  // if (!emailInput || !passwordInput) {
-  //   throw new InvalidEntries('All fields must be filled', 401);
-  // }
   validateInputs({ email: emailInput, password: passwordInput }, schemaLogin);
 
   const user = await User.findOne({ where: { email: emailInput } });
@@ -62,7 +59,13 @@ const createUser = async (displayName, email, password, image) => {
   return login(email, password);
 };
 
+const getAllUsers = async () => {
+  console.log('a');
+  return User.findAll();
+};
+
 module.exports = {
   createUser,
   login,
+  getAllUsers,
 };

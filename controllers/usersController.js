@@ -26,21 +26,20 @@ const login = async (req, res) => {
   }
 };
 
-// const createAdmin = async (req, res) => {
-//   try {
-//     const { name, email, password } = req.body;
-//     const newAdmin = await usersService.createUser(name, email, password, 'admin');
-//     res.status(201).json(newAdmin);
-//   } catch (error) {
-//     const { message, code } = error;
-//     res.status(code).json({
-//       message,
-//     });
-//   }
-// };
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await usersService.getAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    const { message, code } = error;
+    res.status(code).json({
+      message,
+    });
+  }
+};
 
 module.exports = {
-  // createAdmin,
+  getAllUsers,
   createUser,
   login,
 };

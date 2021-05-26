@@ -1,12 +1,13 @@
 const express = require('express');
 const usersController = require('../controllers/usersController');
-// const validateJWT = require('../auth/validateJWT');
+const validateJWT = require('../auth/validateJWT');
 // const validateAdmin = require('../auth/validateAdmin');
 
 const router = express.Router();
 
 router
   .route('/user')
+  .get(validateJWT, usersController.getAllUsers)
   .post(usersController.createUser);
 
 router.post('/login', usersController.login);
