@@ -10,6 +10,10 @@ router
   .get(validateJWT, usersController.getAllUsers)
   .post(usersController.createUser);
 
+router
+.route('/user/:id')
+.get(validateJWT, usersController.getUserById);
+
 router.post('/login', usersController.login);
 
 // router.post('/users/admin', validateJWT, validateAdmin, usersController.createAdmin);

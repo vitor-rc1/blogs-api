@@ -59,13 +59,18 @@ const createUser = async (displayName, email, password, image) => {
   return login(email, password);
 };
 
-const getAllUsers = async () => {
-  console.log('a');
-  return User.findAll();
+const getAllUsers = async () => User.findAll();
+
+const getUserById = async (id) => {
+  const user = await User.findOne({ where: { id } });
+  if (!user) throw new InvalidEntries('User does not exist', 404);
+
+  return user;
 };
 
 module.exports = {
   createUser,
   login,
   getAllUsers,
+  getUserById,
 };
