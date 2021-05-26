@@ -9,7 +9,7 @@ router
   .route('/user')
   .post(usersController.createUser);
 
-// router.post('/login', usersController.login);
+router.post('/login', usersController.login);
 
 // router.post('/users/admin', validateJWT, validateAdmin, usersController.createAdmin);
 
