@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/post')
-  // .get(validateJWT, usersController.getAllUsers);
+  .get(validateJWT, blogPostsController.getAllPosts)
   .post(validateJWT, blogPostsController.createBlogPost);
 
 // router

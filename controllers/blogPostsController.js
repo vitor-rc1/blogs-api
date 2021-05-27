@@ -19,17 +19,17 @@ const createBlogPost = async (req, res) => {
   }
 };
 
-// const getAllUsers = async (req, res) => {
-//   try {
-//     const users = await usersService.getAllUsers();
-//     res.status(200).json(users);
-//   } catch (error) {
-//     const { message, code } = error;
-//     res.status(code).json({
-//       message,
-//     });
-//   }
-// };
+const getAllPosts = async (req, res) => {
+  try {
+    const users = await blogPostsService.getAllPosts();
+    res.status(200).json(users);
+  } catch (error) {
+    const { message, code } = error;
+    res.status(code).json({
+      message,
+    });
+  }
+};
 
 // const getUserById = async (req, res) => {
 //   try {
@@ -46,6 +46,6 @@ const createBlogPost = async (req, res) => {
 
 module.exports = {
   createBlogPost,
-  // getAllUsers,
+  getAllPosts,
   // getUserById,
 };

@@ -38,7 +38,12 @@ const createBlogPost = async (title, content, categoryIds, userId) => {
   return post;
 };
 
-// const getAllUsers = async () => User.findAll();
+const getAllPosts = async () => BlogPost.findAll({
+  include: [
+      { association: 'user' },
+      { association: 'categories', through: { attributes: [] } },
+    ],
+});
 
 // const getUserById = async (id) => {
 //   const user = await User.findOne({ where: { id } });
@@ -49,6 +54,6 @@ const createBlogPost = async (title, content, categoryIds, userId) => {
 
 module.exports = {
   createBlogPost,
-  // getAllUsers,
+  getAllPosts,
   // getUserById,
 };
