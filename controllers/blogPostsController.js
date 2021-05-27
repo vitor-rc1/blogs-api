@@ -78,7 +78,7 @@ const deleteBlogPostById = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedPost = await blogPostsService.deleteBlogPostById(id);
-    res.status(200).json(deletedPost);
+    res.status(204).json(deletedPost);
   } catch (error) {
     const { message, code } = error;
     if (code) {

@@ -14,6 +14,6 @@ router
 .route('/post/:id')
 .get(validateJWT, blogPostsController.getPostById)
 .put(validateJWT, postBelongUser, blogPostsController.editBlogPostById)
-.delete(validateJWT, blogPostsController.deleteBlogPostById);
+.delete(validateJWT, postBelongUser, blogPostsController.deleteBlogPostById);
 
 module.exports = router;
