@@ -31,21 +31,21 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-// const getUserById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const users = await usersService.getUserById(id);
-//     res.status(200).json(users);
-//   } catch (error) {
-//     const { message, code } = error;
-//     res.status(code).json({
-//       message,
-//     });
-//   }
-// };
+const getPostById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const users = await blogPostsService.getPostById(id);
+    res.status(200).json(users);
+  } catch (error) {
+    const { message, code } = error;
+    res.status(code).json({
+      message,
+    });
+  }
+};
 
 module.exports = {
   createBlogPost,
   getAllPosts,
-  // getUserById,
+  getPostById,
 };

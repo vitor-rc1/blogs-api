@@ -45,6 +45,20 @@ const getAllPosts = async () => BlogPost.findAll({
     ],
 });
 
+const getPostById = async (id) => {
+  const post = await BlogPost.findByPk(id, {
+    include: [
+        { association: 'user' },
+        { association: 'categories', through: { attributes: [] } },
+      ],
+  });
+  if (!post) {
+    throw new InvalidEntries('Post does not exist', 404);
+  }
+
+  return post;
+};
+
 // const getUserById = async (id) => {
 //   const user = await User.findOne({ where: { id } });
 //   if (!user) throw new InvalidEntries('User does not exist', 404);
@@ -55,5 +69,5 @@ const getAllPosts = async () => BlogPost.findAll({
 module.exports = {
   createBlogPost,
   getAllPosts,
-  // getUserById,
+  getPostById,
 };

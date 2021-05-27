@@ -9,8 +9,8 @@ router
   .get(validateJWT, blogPostsController.getAllPosts)
   .post(validateJWT, blogPostsController.createBlogPost);
 
-// router
-// .route('/post/:id')
-// .get(validateJWT, usersController.getUserById);
+router
+.route('/post/:id')
+.get(validateJWT, blogPostsController.getPostById);
 
 module.exports = router;
