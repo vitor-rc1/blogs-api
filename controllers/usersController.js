@@ -7,7 +7,12 @@ const createUser = async (req, res) => {
     res.status(201).json(newUser);
   } catch (error) {
     const { message, code } = error;
-    res.status(code).json({
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
       message,
     });
   }
@@ -20,7 +25,12 @@ const login = async (req, res) => {
     res.status(200).json(token);
   } catch (error) {
     const { message, code } = error;
-    res.status(code).json({
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
       message,
     });
   }
@@ -32,7 +42,12 @@ const getAllUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     const { message, code } = error;
-    res.status(code).json({
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
       message,
     });
   }
@@ -45,7 +60,12 @@ const getUserById = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     const { message, code } = error;
-    res.status(code).json({
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
       message,
     });
   }

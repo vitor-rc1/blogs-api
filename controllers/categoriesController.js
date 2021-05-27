@@ -7,7 +7,12 @@ const createCategorie = async (req, res) => {
     res.status(201).json(newCategory);
   } catch (error) {
     const { message, code } = error;
-    res.status(code).json({
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
       message,
     });
   }
@@ -19,7 +24,12 @@ const getAllCategories = async (req, res) => {
     res.status(200).json(categories);
   } catch (error) {
     const { message, code } = error;
-    res.status(code).json({
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
       message,
     });
   }

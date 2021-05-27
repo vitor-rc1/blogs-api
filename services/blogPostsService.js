@@ -9,6 +9,11 @@ const schemaCreatePost = joi.object({
   userId: joi.number().required(),
 });
 
+const schemaEditPost = joi.object({
+  title: joi.string().required(),
+  content: joi.string().required(),
+});
+
 const validateInputs = (inputs, schema) => {
   console.log(inputs.userId);
 
@@ -59,15 +64,29 @@ const getPostById = async (id) => {
   return post;
 };
 
-// const getUserById = async (id) => {
-//   const user = await User.findOne({ where: { id } });
-//   if (!user) throw new InvalidEntries('User does not exist', 404);
+const editBlogPostById = async (title, content, categoryIds, id) => {
+  if (categoryIds) {
+    throw new InvalidEntries('Categories cannot be edited', 400);
+  }
+  validateInputs({ title, content }, schemaEditPost);
+  await BlogPost.update(
+    { title, content },
+    { where: { id } },
+  );
 
-//   return user;
-// };
+  return BlogPost.findByPk(id, {
+    include: {
+      association: 'categories', through: { attributes: [] },
+    },
+  });
+};
+
+const deleteBlogPostById = async (id) => BlogPost.destroy({ where: { id } });
 
 module.exports = {
   createBlogPost,
   getAllPosts,
   getPostById,
+  editBlogPostById,
+  deleteBlogPostById,
 };
