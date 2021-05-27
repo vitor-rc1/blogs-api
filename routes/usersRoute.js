@@ -10,6 +10,10 @@ router
   .post(usersController.createUser);
 
 router
+.route('/user/me')
+.delete(validateJWT, usersController.deleteUser);
+
+router
 .route('/user/:id')
 .get(validateJWT, usersController.getUserById);
 
