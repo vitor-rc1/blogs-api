@@ -1,4 +1,5 @@
 const joi = require('joi');
+const { Op } = require('sequelize');
 const { BlogPost, PostsCategorie, Categorie } = require('../models');
 const InvalidEntries = require('../customErrors/invalidEntries');
 
@@ -83,10 +84,26 @@ const editBlogPostById = async (title, content, categoryIds, id) => {
 
 const deleteBlogPostById = async (id) => BlogPost.destroy({ where: { id } });
 
+// Referencia para a solução abaixo
+// https://stackoverflow.com/questions/34255792/sequelize-how-to-search-multiple-columns/34263873
+const searchTermInPosts = async (searchTerm) => BlogPost.findAll({
+  where: {
+    [Op.or]: [
+     { title: { [Op.like]: `%${searchTerm}%` } },
+     { content: { [Op.like]: `%${searchTerm}%` } },
+    ],
+  },
+  include: [
+    { association: 'user' },
+    { association: 'categories', through: { attributes: [] } },
+  ],
+});
+
 module.exports = {
   createBlogPost,
   getAllPosts,
   getPostById,
   editBlogPostById,
   deleteBlogPostById,
+  searchTermInPosts,
 };

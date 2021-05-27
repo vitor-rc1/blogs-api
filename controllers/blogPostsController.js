@@ -92,10 +92,30 @@ const deleteBlogPostById = async (req, res) => {
   }
 };
 
+const searchTermInPosts = async (req, res) => {
+  try {
+    const { q } = req.query;
+    console.log(q, '-------------------------');
+    const filteredPosts = await blogPostsService.searchTermInPosts(q);
+    res.status(200).json(filteredPosts);
+  } catch (error) {
+    const { message, code } = error;
+    if (code) {
+      return res.status(code).json({
+        message,
+      });
+    }
+    return res.status(500).json({
+      message,
+    });
+  }
+};
+
 module.exports = {
   createBlogPost,
   getAllPosts,
   getPostById,
   editBlogPostById,
   deleteBlogPostById,
+  searchTermInPosts,
 };
